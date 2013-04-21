@@ -27,7 +27,7 @@ PRODUCT_COPY_FILES += \
 
 # init
 PRODUCT_COPY_FILES += \
-    device/huawei/c8860e/root/init.qcom.sh:root/init.qcom.sh
+    device/huawei/u8860/root/init.qcom.sh:root/init.qcom.sh
 
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := huawei_u8860

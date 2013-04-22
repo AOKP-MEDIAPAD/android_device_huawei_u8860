@@ -582,7 +582,7 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
       OPTIONS.source_info_dict)
   target_boot = common.GetBootableImage(
       "/tmp/boot.img", "boot.img", OPTIONS.target_tmp, "BOOT")
-  updating_boot = (source_boot.data != target_boot.data)
+  updating_boot = False#(source_boot.data != target_boot.data)
 
   updating_recovery = False
 
@@ -627,7 +627,13 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
                        target_boot.size, target_boot.sha1))
     so_far += source_boot.size
     script.SetProgress(so_far / total_verify_size)
-
+    
+  # write boot.img
+  bootimgfile = open("out/target/product/u8860/boot.img", 'r')
+  bootimg = bootimgfile.read()
+  common.ZipWriteStr(output_zip, "boot.img", bootimg)
+  bootimgfile.close()
+    
   if patch_list or updating_recovery or updating_boot:
     script.CacheFreeSpaceCheck(largest_source_size)
 
@@ -681,7 +687,11 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
     print "boot image changed; including."
   else:
     print "boot image unchanged; skipping."
-
+  
+  #script.WriteRawImage("/boot", "/boot/image", "boot.img") # Modified by Blefish
+  script.AppendExtra('mount("vfat", "EMMC", "/dev/block/mmcblk0p1", "/cust");')
+  script.AppendExtra('package_extract_file("boot.img", "/cust/image/boot.img");')
+  script.AppendExtra('unmount("/cust");')
   if updating_recovery:
     # Recovery is generated as a patch using both the boot image
     # (which contains the same linux kernel as recovery) and the file

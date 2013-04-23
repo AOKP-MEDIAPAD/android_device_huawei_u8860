@@ -222,31 +222,6 @@ class EdifyGenerator(object):
       else:
         raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
 
-  # Added by Blefish --START
-  # This is same as WriteRawImage original, but with additional mounting and saving to proper place
-  # due to U8800 having recovery, boot and other in the same partition.
-  def WriteRawImage(self, mount_point, location, fn):
-    """Write the given package file into the partition for the given
-    mount point."""
-
-    fstab = self.info["fstab"]
-    if fstab:
-      p = fstab[mount_point]
-      partition_type = common.PARTITION_TYPES[p.fs_type]
-      args = {'device': p.device, 'fn': fn, 'location': location}
-      if partition_type == "MTD":
-        self.script.append(
-            'package_extract_file("%(fn)s", "/tmp/boot.img");'
-            'write_raw_image("/tmp/boot.img", "%(device)s");' % args
-            % args)
-      elif partition_type == "EMMC":
-        self.Mount(mount_point)
-        self.script.append(
-            'package_extract_file("%(fn)s", "%(location)s/%(fn)s");' % args)
-      else:
-        raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
-  # Added by Blefish --END
-
   def SetPermissions(self, fn, uid, gid, mode):
     """Set file ownership and permissions."""
     self.script.append('set_perm(%d, %d, 0%o, "%s");' % (uid, gid, mode, fn))

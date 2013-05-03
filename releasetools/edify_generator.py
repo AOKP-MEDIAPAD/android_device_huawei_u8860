@@ -101,8 +101,15 @@ class EdifyGenerator(object):
            ");")
     self.script.append(self._WordWrap(cmd))
 
-  def RunPersist(self, arg):
-    self.script.append('run_program("/tmp/install/bin/persist.sh", "%s");' % arg)
+  def RunBackup(self, command):
+    self.script.append('package_extract_file("system/bin/backuptool.sh", "/tmp/backuptool.sh");')
+    self.script.append('package_extract_file("system/bin/backuptool.functions", "/tmp/backuptool.functions");')
+    self.script.append('set_perm(0, 0, 0777, "/tmp/backuptool.sh");')
+    self.script.append('set_perm(0, 0, 0644, "/tmp/backuptool.functions");')
+    self.script.append(('run_program("/tmp/backuptool.sh", "%s");' % command))
+    if command == "restore":
+        self.script.append('delete("/system/bin/backuptool.sh");')
+        self.script.append('delete("/system/bin/backuptool.functions");')
 
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next
@@ -224,6 +231,31 @@ class EdifyGenerator(object):
              '       delete("/tmp/%(device)s.img"));') % args)
       else:
         raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
+
+  # Added by Blefish --START
+  # This is same as WriteRawImage original, but with additional mounting and saving to proper place
+  # due to U8800 having recovery, boot and other in the same partition.
+  def WriteRawImage(self, mount_point, location, fn):
+    """Write the given package file into the partition for the given
+    mount point."""
+
+    fstab = self.info["fstab"]
+    if fstab:
+      p = fstab[mount_point]
+      partition_type = common.PARTITION_TYPES[p.fs_type]
+      args = {'device': p.device, 'fn': fn, 'location': location}
+      if partition_type == "MTD":
+        self.script.append(
+            'package_extract_file("%(fn)s", "/tmp/boot.img");'
+            'write_raw_image("/tmp/boot.img", "%(device)s");' % args
+            % args)
+      elif partition_type == "EMMC":
+        self.Mount(mount_point)
+        self.script.append(
+            'package_extract_file("%(fn)s", "%(location)s/%(fn)s");' % args)
+      else:
+        raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
+  # Added by Blefish --END
 
   def SetPermissions(self, fn, uid, gid, mode):
     """Set file ownership and permissions."""

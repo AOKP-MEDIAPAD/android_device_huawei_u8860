@@ -11,3 +11,11 @@ mobiledata.interfaces=rmnet0,gprs,ppp0
 ro.confg.hw_appsbootversion=U8860VSHENDUOS_APPSBOOT
 ro.confg.hw_appversion=U8860VSHENDUOS_KERNEL
 ro.confg.hw_appfsversion=U8860VSHENDUOS_SYSIMG
+
+# hardware info
+ro.device.chipset=Qualcomm Snapdragon MSM8255T 
+ro.device.cpu=1.4GHz Core 
+ro.device.gpu=Qualcomm Adreno 205
+ro.device.rear_cam=8 Megapixel
+ro.device.front_cam=0.3 Megapixel
+ro.device.screen_res=480 x 854

@@ -27,8 +27,8 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/huawei/u8860/prebuilt/lib/hw/audio.primary.msm7x30:system/lib/hw/audio.primary.msm7x30 \
-    device/huawei/u8860/prebuilt/lib/hw/audio_policy.msm7x30:system/lib/hw/audio_policy.msm7x30	
+    device/huawei/u8860/prebuilt/lib/hw/audio.primary.msm7x30.so:system/lib/hw/audio.primary.msm7x30.so \
+    device/huawei/u8860/prebuilt/lib/hw/audio_policy.msm7x30.so:system/lib/hw/audio_policy.msm7x30.so	
 	
 # init
 PRODUCT_COPY_FILES += \

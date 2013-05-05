@@ -29,7 +29,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/huawei/u8860/prebuilt/lib/hw/audio.primary.msm7x30.so:system/lib/hw/audio.primary.msm7x30.so \
     device/huawei/u8860/prebuilt/lib/hw/audio_policy.msm7x30.so:system/lib/hw/audio_policy.msm7x30.so	
-	
+
+#Goo.im
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.goo.developerid=zyr3x \
+    ro.goo.board=u8860 \
+    ro.goo.rom=AOKPMR1u8860 \
+    ro.goo.version=$(shell date +%Y%m%d)
+
 # init
 PRODUCT_COPY_FILES += \
     device/huawei/u8860/root/init.qcom.sh:root/init.qcom.sh

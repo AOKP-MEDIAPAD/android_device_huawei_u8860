@@ -25,6 +25,11 @@ DEVICE_PACKAGE_OVERLAYS += device/huawei/u8860/overlay
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
+# Audio
+PRODUCT_COPY_FILES += \
+    device/huawei/u8860/prebuilt/lib/hw/audio.primary.msm7x30:system/lib/hw/audio.primary.msm7x30 \
+    device/huawei/u8860/prebuilt/lib/hw/audio_policy.msm7x30:system/lib/hw/audio_policy.msm7x30	
+	
 # init
 PRODUCT_COPY_FILES += \
     device/huawei/u8860/root/init.qcom.sh:root/init.qcom.sh

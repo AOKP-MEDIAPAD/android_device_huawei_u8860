@@ -34,6 +34,12 @@ PRODUCT_COPY_FILES += \
     device/huawei/u8860/prebuilt/lib/hw/audio.primary.msm7x30.so:system/lib/hw/audio.primary.msm7x30.so \
     device/huawei/u8860/prebuilt/lib/hw/audio_policy.msm7x30.so:system/lib/hw/audio_policy.msm7x30.so	
 
+# Camera
+PRODUCT_COPY_FILES += \
+    device/huawei/u8860/prebuilt/lib/libcamera_client.so:system/lib/libcamera_client.so \
+    device/huawei/u8860/prebuilt/lib/libcamera_metadata.so:system/lib/libcamera_metadata.so \
+	device/huawei/u8860/prebuilt/lib/libcameraservice.so:system/lib/libcameraservice.so \
+	
 #Goo.im
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.goo.developerid=zyr3x \

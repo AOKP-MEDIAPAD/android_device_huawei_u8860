@@ -21,6 +21,10 @@ DEVICE_PACKAGE_OVERLAYS += device/huawei/u8860/overlay
 #PRODUCT_PACKAGES += \
 #    DisplayFix
 
+PRODUCT_PACKAGES += \
+     Flashlight
+
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml

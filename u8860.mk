@@ -42,7 +42,7 @@ PRODUCT_COPY_FILES += \
 	
 # Kernel
 PRODUCT_COPY_FILES += \
-    device/huawei/u8860/prebuilt/lib/etc/sysctl.conf:system/etc/sysctl.conf
+    device/huawei/u8860/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf
 	
 #Goo.im
 PRODUCT_PROPERTY_OVERRIDES += \

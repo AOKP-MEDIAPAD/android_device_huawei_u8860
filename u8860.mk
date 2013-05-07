@@ -40,6 +40,10 @@ PRODUCT_COPY_FILES += \
     device/huawei/u8860/prebuilt/lib/libcamera_metadata.so:system/lib/libcamera_metadata.so \
 	device/huawei/u8860/prebuilt/lib/libcameraservice.so:system/lib/libcameraservice.so \
 	
+# Kernel
+PRODUCT_COPY_FILES += \
+    device/huawei/u8860/prebuilt/lib/etc/sysctl.conf:system/etc/sysctl.conf
+	
 #Goo.im
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.goo.developerid=zyr3x \

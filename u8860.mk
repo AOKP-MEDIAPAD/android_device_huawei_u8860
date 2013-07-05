@@ -44,13 +44,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/huawei/u8860/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf
 	
-#Goo.im
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.goo.developerid=zyr3x \
-    ro.goo.board=u8860 \
-    ro.goo.rom=AOKPMR1u8860 \
-    ro.goo.version=$(shell date +%Y%m%d)
-
 # init
 PRODUCT_COPY_FILES += \
     device/huawei/u8860/root/init.qcom.sh:root/init.qcom.sh
